@@ -1,0 +1,23 @@
+name: flutter_sei
+description: Adapter layer for Sxnnyside Eloquent Icons (SEI) - a comprehensive icon system for Flutter applications.
+version: 1.0.0
+homepage: https://github.com/HoujouSxnnyside/flutter_sei
+
+environment:
+  sdk: ^3.9.2
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  assets:
+    - assets/outline/
+    - assets/filled/
