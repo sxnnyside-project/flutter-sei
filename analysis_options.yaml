@@ -1,4 +1,10 @@
 include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+# DXQE DX-02 — strongest practical correctness guarantees for Dart's
+# gradual type system: no implicit dynamic, no unchecked raw types, no
+# unsound inference left to chance.
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true

@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-  <circle cx="12" cy="12" r="10"/>
-  <path d="M15.5 8.5l-7 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M8.5 8.5l7 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <mask id="m-error">
+    <rect width="24" height="24" fill="#fff"/>
+    <rect x="-1" y="-5" width="2" height="10" rx="1" fill="#000" transform="translate(12,12) rotate(45)"/>
+    <rect x="-1" y="-5" width="2" height="10" rx="1" fill="#000" transform="translate(12,12) rotate(-45)"/>
+  </mask>
+  <circle cx="12" cy="12" r="10" fill="currentColor" mask="url(#m-error)"/>
 </svg>

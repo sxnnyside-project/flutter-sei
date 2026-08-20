@@ -1,375 +1,85 @@
-/// Enum representing all available Sxnnyside Eloquent Icons.
-///
-/// Each enum value corresponds to an SVG file in the assets directory.
-enum SeiIcon {
-  account,
-  add,
-  alert,
-  analytics,
-  api,
-  app,
-  apps,
-  back,
-  backup,
-  badge,
-  brackets,
-  browser,
-  bug,
-  build,
-  calendar,
-  chartBar,
-  chartLine,
-  chartPie,
-  check,
-  checklist,
-  clock,
-  close,
-  cloud,
-  code,
-  connection,
-  cpu,
-  creditCard,
-  crown,
-  dashboard,
-  database,
-  debug,
-  deploy,
-  discount,
-  download,
-  edit,
-  error,
-  exploit,
-  file,
-  filter,
-  fingerprint,
-  firewall,
-  flame,
-  focus,
-  folder,
-  function,
-  gamepad,
-  globe,
-  heart,
-  help,
-  home,
-  info,
-  install,
-  invite,
-  invoice,
-  joystick,
-  key,
-  layoutGrid,
-  layoutList,
-  linkExternal,
-  link,
-  lockOpen,
-  lock,
-  log,
-  login,
-  logout,
-  menu,
-  message,
-  money,
-  more,
-  music,
-  mute,
-  notification,
-  offline,
-  package,
-  plugin,
-  power,
-  pricing,
-  profile,
-  progress,
-  qr,
-  receipt,
-  refresh,
-  register,
-  remove,
-  restore,
-  router,
-  scan,
-  search,
-  server,
-  settings,
-  share,
-  shield,
-  skull,
-  sort,
-  sound,
-  spark,
-  star,
-  subscription,
-  success,
-  sync,
-  tab,
-  task,
-  team,
-  terminal,
-  timer,
-  uninstall,
-  unlock,
-  update,
-  upload,
-  user,
-  users,
-  variable,
-  verified,
-  version,
-  visibilityOff,
-  visibility,
-  wallet,
-  warning,
-  wifi,
-  window,
-}
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-/// Extension to convert [SeiIcon] enum values to their corresponding
-/// SVG filename.
-extension SeiIconExtension on SeiIcon {
-  /// Returns the SVG filename for this icon (without path or extension).
-  String get fileName {
-    switch (this) {
-      case SeiIcon.account:
-        return 'account';
-      case SeiIcon.add:
-        return 'add';
-      case SeiIcon.alert:
-        return 'alert';
-      case SeiIcon.analytics:
-        return 'analytics';
-      case SeiIcon.api:
-        return 'api';
-      case SeiIcon.app:
-        return 'app';
-      case SeiIcon.apps:
-        return 'apps';
-      case SeiIcon.back:
-        return 'back';
-      case SeiIcon.backup:
-        return 'backup';
-      case SeiIcon.badge:
-        return 'badge';
-      case SeiIcon.brackets:
-        return 'brackets';
-      case SeiIcon.browser:
-        return 'browser';
-      case SeiIcon.bug:
-        return 'bug';
-      case SeiIcon.build:
-        return 'build';
-      case SeiIcon.calendar:
-        return 'calendar';
-      case SeiIcon.chartBar:
-        return 'chart-bar';
-      case SeiIcon.chartLine:
-        return 'chart-line';
-      case SeiIcon.chartPie:
-        return 'chart-pie';
-      case SeiIcon.check:
-        return 'check';
-      case SeiIcon.checklist:
-        return 'checklist';
-      case SeiIcon.clock:
-        return 'clock';
-      case SeiIcon.close:
-        return 'close';
-      case SeiIcon.cloud:
-        return 'cloud';
-      case SeiIcon.code:
-        return 'code';
-      case SeiIcon.connection:
-        return 'connection';
-      case SeiIcon.cpu:
-        return 'cpu';
-      case SeiIcon.creditCard:
-        return 'credit-card';
-      case SeiIcon.crown:
-        return 'crown';
-      case SeiIcon.dashboard:
-        return 'dashboard';
-      case SeiIcon.database:
-        return 'database';
-      case SeiIcon.debug:
-        return 'debug';
-      case SeiIcon.deploy:
-        return 'deploy';
-      case SeiIcon.discount:
-        return 'discount';
-      case SeiIcon.download:
-        return 'download';
-      case SeiIcon.edit:
-        return 'edit';
-      case SeiIcon.error:
-        return 'error';
-      case SeiIcon.exploit:
-        return 'exploit';
-      case SeiIcon.file:
-        return 'file';
-      case SeiIcon.filter:
-        return 'filter';
-      case SeiIcon.fingerprint:
-        return 'fingerprint';
-      case SeiIcon.firewall:
-        return 'firewall';
-      case SeiIcon.flame:
-        return 'flame';
-      case SeiIcon.focus:
-        return 'focus';
-      case SeiIcon.folder:
-        return 'folder';
-      case SeiIcon.function:
-        return 'function';
-      case SeiIcon.gamepad:
-        return 'gamepad';
-      case SeiIcon.globe:
-        return 'globe';
-      case SeiIcon.heart:
-        return 'heart';
-      case SeiIcon.help:
-        return 'help';
-      case SeiIcon.home:
-        return 'home';
-      case SeiIcon.info:
-        return 'info';
-      case SeiIcon.install:
-        return 'install';
-      case SeiIcon.invite:
-        return 'invite';
-      case SeiIcon.invoice:
-        return 'invoice';
-      case SeiIcon.joystick:
-        return 'joystick';
-      case SeiIcon.key:
-        return 'key';
-      case SeiIcon.layoutGrid:
-        return 'layout-grid';
-      case SeiIcon.layoutList:
-        return 'layout-list';
-      case SeiIcon.linkExternal:
-        return 'link-external';
-      case SeiIcon.link:
-        return 'link';
-      case SeiIcon.lockOpen:
-        return 'lock-open';
-      case SeiIcon.lock:
-        return 'lock';
-      case SeiIcon.log:
-        return 'log';
-      case SeiIcon.login:
-        return 'login';
-      case SeiIcon.logout:
-        return 'logout';
-      case SeiIcon.menu:
-        return 'menu';
-      case SeiIcon.message:
-        return 'message';
-      case SeiIcon.money:
-        return 'money';
-      case SeiIcon.more:
-        return 'more';
-      case SeiIcon.music:
-        return 'music';
-      case SeiIcon.mute:
-        return 'mute';
-      case SeiIcon.notification:
-        return 'notification';
-      case SeiIcon.offline:
-        return 'offline';
-      case SeiIcon.package:
-        return 'package';
-      case SeiIcon.plugin:
-        return 'plugin';
-      case SeiIcon.power:
-        return 'power';
-      case SeiIcon.pricing:
-        return 'pricing';
-      case SeiIcon.profile:
-        return 'profile';
-      case SeiIcon.progress:
-        return 'progress';
-      case SeiIcon.qr:
-        return 'qr';
-      case SeiIcon.receipt:
-        return 'receipt';
-      case SeiIcon.refresh:
-        return 'refresh';
-      case SeiIcon.register:
-        return 'register';
-      case SeiIcon.remove:
-        return 'remove';
-      case SeiIcon.restore:
-        return 'restore';
-      case SeiIcon.router:
-        return 'router';
-      case SeiIcon.scan:
-        return 'scan';
-      case SeiIcon.search:
-        return 'search';
-      case SeiIcon.server:
-        return 'server';
-      case SeiIcon.settings:
-        return 'settings';
-      case SeiIcon.share:
-        return 'share';
-      case SeiIcon.shield:
-        return 'shield';
-      case SeiIcon.skull:
-        return 'skull';
-      case SeiIcon.sort:
-        return 'sort';
-      case SeiIcon.sound:
-        return 'sound';
-      case SeiIcon.spark:
-        return 'spark';
-      case SeiIcon.star:
-        return 'star';
-      case SeiIcon.subscription:
-        return 'subscription';
-      case SeiIcon.success:
-        return 'success';
-      case SeiIcon.sync:
-        return 'sync';
-      case SeiIcon.tab:
-        return 'tab';
-      case SeiIcon.task:
-        return 'task';
-      case SeiIcon.team:
-        return 'team';
-      case SeiIcon.terminal:
-        return 'terminal';
-      case SeiIcon.timer:
-        return 'timer';
-      case SeiIcon.uninstall:
-        return 'uninstall';
-      case SeiIcon.unlock:
-        return 'unlock';
-      case SeiIcon.update:
-        return 'update';
-      case SeiIcon.upload:
-        return 'upload';
-      case SeiIcon.user:
-        return 'user';
-      case SeiIcon.users:
-        return 'users';
-      case SeiIcon.variable:
-        return 'variable';
-      case SeiIcon.verified:
-        return 'verified';
-      case SeiIcon.version:
-        return 'version';
-      case SeiIcon.visibilityOff:
-        return 'visibility-off';
-      case SeiIcon.visibility:
-        return 'visibility';
-      case SeiIcon.wallet:
-        return 'wallet';
-      case SeiIcon.warning:
-        return 'warning';
-      case SeiIcon.wifi:
-        return 'wifi';
-      case SeiIcon.window:
-        return 'window';
-    }
+import 'sei_icons.dart';
+import 'sei_icons_filled.dart';
+import 'sei_style.dart';
+
+/// Displays a [Sxnnyside Eloquent Icons](https://pub.dev/packages/flutter_sei)
+/// (SEI) icon.
+///
+/// ```dart
+/// SeiIcon(icon: SeiIcons.home)
+///
+/// SeiIcon(icon: SeiIcons.search, size: 32, color: Colors.blue)
+///
+/// // Filled style — only icons with filled artwork are accepted, so this
+/// // can't reference an icon that doesn't have one.
+/// SeiIcon.filled(icon: SeiIconsFilled.star)
+/// ```
+class SeiIcon extends StatelessWidget {
+  /// Creates an outline SEI icon, or an icon in [style] if provided.
+  ///
+  /// The [style] parameter is deprecated: not every [SeiIcons] value has a
+  /// filled asset, so requesting `style: SeiStyle.filled` here can fail at
+  /// runtime for icons without one. Use [SeiIcon.filled] instead, which only
+  /// accepts icons that are guaranteed to have filled artwork.
+  const SeiIcon({
+    super.key,
+    required SeiIcons icon,
+    this.size = 24.0,
+    this.color,
+    @Deprecated(
+      'Use SeiIcon.filled(icon: ...) for a filled icon. It only accepts '
+      'SeiIconsFilled, so it cannot reference an icon with no filled '
+      'asset the way style: SeiStyle.filled can. '
+      'This parameter will be removed in a future release.',
+    )
+    SeiStyle style = SeiStyle.outline,
+  }) : _icon = icon,
+       _filledIcon = null,
+       _style = style;
+
+  /// Creates a filled SEI icon.
+  ///
+  /// Only icons in [SeiIconsFilled] have filled artwork; this constructor's
+  /// [icon] type reflects that, so it's not possible to request a filled
+  /// icon that doesn't exist.
+  const SeiIcon.filled({
+    super.key,
+    required SeiIconsFilled icon,
+    this.size = 24.0,
+    this.color,
+  }) : _filledIcon = icon,
+       _icon = null,
+       _style = SeiStyle.filled;
+
+  final SeiIcons? _icon;
+  final SeiIconsFilled? _filledIcon;
+  final SeiStyle _style;
+
+  /// The width and height of the icon, in logical pixels.
+  final double size;
+
+  /// The color to tint the icon.
+  ///
+  /// If null, the icon renders with its SVG's own colors.
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    final filledIcon = _filledIcon;
+    final assetPath = filledIcon != null
+        ? resolveFilledAssetPath(filledIcon)
+        : resolveAssetPath(_icon!, _style);
+
+    return SvgPicture.asset(
+      assetPath,
+      width: size,
+      height: size,
+      colorFilter: color != null
+          ? ColorFilter.mode(color!, BlendMode.srcIn)
+          : null,
+    );
   }
 }

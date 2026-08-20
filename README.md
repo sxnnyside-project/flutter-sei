@@ -1,26 +1,24 @@
 # flutter_sei
 
-Adapter layer for Sxnnyside Eloquent Icons (SEI) - a comprehensive icon system for Flutter applications. This package provides a type-safe, widget-based API to use SEI icons with support for multiple styles and customization options.
+Flutter widgets for [Sxnnyside Eloquent Icons](https://github.com/sxnnyside-project/sxnnyside-eloquent-icons) (SEI) — a curated, platform-agnostic SVG icon system.
 
 ## Features
 
-- **Type-safe icon access** through the `SeiIcon` enum
-- **Multiple styles** - outline and filled variants
-- **Easy customization** - control size and color
-- **No Material dependency** - works with any Flutter widget tree
-- **120+ icons** covering common UI needs
-- **SVG-based** - crisp rendering at any size
+- **`SeiIcon` widget** — a single, small widget for rendering any icon.
+- **`SeiIcons` enum** — type-safe, autocomplete-friendly icon identifiers.
+- **Type-safe filled icons** via `SeiIcon.filled` and `SeiIconsFilled` — only
+  icons that actually have filled artwork are accepted, so there's no
+  runtime crash for requesting one that doesn't exist.
+- **Size and color customization**, with `currentColor`-style tinting via `ColorFilter`.
+- **No Material dependency** — works with any Flutter widget tree.
+- **140+ icons**, SVG-based for crisp rendering at any size.
 
 ## Getting started
 
-Add `flutter_sei` to your `pubspec.yaml`:
-
 ```yaml
 dependencies:
-  flutter_sei: ^1.0.0
+  flutter_sei: ^2.0.0
 ```
-
-Run:
 
 ```bash
 flutter pub get
@@ -28,52 +26,86 @@ flutter pub get
 
 ## Usage
 
-Import the package:
-
 ```dart
 import 'package:flutter_sei/flutter_sei.dart';
-```
 
-Use icons in your widgets:
-
-```dart
 // Basic usage
-SxEloIcon(
-  icon: SeiIcon.home,
-)
+const SeiIcon(icon: SeiIcons.home)
 
 // With customization
-SxEloIcon(
-  icon: SeiIcon.search,
+SeiIcon(
+  icon: SeiIcons.search,
   size: 32,
   color: Colors.blue,
-  style: SeiStyle.filled,
 )
 
-// In a button
+// Filled style — SeiIconsFilled only contains icons that have filled
+// artwork, so this can't reference one that doesn't exist.
+SeiIcon.filled(icon: SeiIconsFilled.star)
+
+// Inside a button
 IconButton(
-  icon: SxEloIcon(
-    icon: SeiIcon.settings,
-    color: Colors.grey,
-  ),
+  icon: const SeiIcon(icon: SeiIcons.settings),
   onPressed: () {},
 )
 ```
 
-Available parameters:
+See the [example app](example/lib/main.dart) for a fuller demonstration, including icon grids and list usage.
 
-- `icon` (required) - The icon to display from `SeiIcon` enum
-- `size` (optional, default: 24.0) - Icon size in logical pixels
-- `color` (optional) - Color to apply to the icon
-- `style` (optional, default: `SeiStyle.outline`) - Icon style variant
+### Parameters
 
-## Additional information
+`SeiIcon(...)` — outline icons (every `SeiIcons` value):
 
-**Documentation**: All public APIs are documented with inline documentation. Use your IDE's autocomplete to explore available icons and options.
+| Parameter | Type        | Default             | Description                       |
+|-----------|-------------|----------------------|------------------------------------|
+| `icon`    | `SeiIcons`  | required             | The icon to render.                |
+| `size`    | `double`    | `24.0`                | Width and height, in logical pixels. |
+| `color`   | `Color?`    | `null`                | Tint applied to the icon.          |
+| `style`   | `SeiStyle`  | `SeiStyle.outline`    | ⚠️ Deprecated — use `SeiIcon.filled` for filled icons. |
 
-**Contributing**: This is an adapter layer for the SEI design system. Icon requests should be directed to the main SEI project.
+`SeiIcon.filled(...)` — filled icons (only `SeiIconsFilled` values):
 
-**Issues**: Report bugs or request features on the [GitHub repository](https://github.com/sxnnyside/flutter_sei/issues).
+| Parameter | Type              | Default   | Description              |
+|-----------|-------------------|-----------|---------------------------|
+| `icon`    | `SeiIconsFilled`  | required  | The icon to render.       |
+| `size`    | `double`          | `24.0`    | Width and height, in logical pixels. |
+| `color`   | `Color?`          | `null`    | Tint applied to the icon. |
 
-**Package development**: This package follows semantic versioning. Expect stable APIs and backward compatibility within major versions.
+## Migrating from 1.x
 
+Version 2.0.0 renamed the public API to match Flutter's own `Icon`/`Icons`
+convention:
+
+- `SxEloIcon` → `SeiIcon`
+- `SeiIcon` (the enum) → `SeiIcons`
+
+```dart
+// Before (1.x)
+SxEloIcon(icon: SeiIcon.home)
+
+// After (2.x)
+SeiIcon(icon: SeiIcons.home)
+```
+
+It also deprecated `SeiIcon`'s `style` parameter in favor of `SeiIcon.filled`:
+
+```dart
+// Deprecated
+SeiIcon(icon: SeiIcons.star, style: SeiStyle.filled)
+
+// Preferred — icon: SeiIconsFilled.star, not SeiIcons.star
+SeiIcon.filled(icon: SeiIconsFilled.star)
+```
+
+## License
+
+The Dart/Flutter code in this package is MIT-licensed — see [LICENSE](LICENSE).
+
+The bundled SVG assets are Sxnnyside Eloquent Icons (SEI) and remain governed
+by [SEI's own license](https://github.com/sxnnyside-project/sxnnyside-eloquent-icons/blob/main/LICENSE)
+(free to use in your apps with attribution; not for standalone resale or
+rebranding as a competing icon set).
+
+## Issues
+
+Report bugs or request icons on the [SEI repository](https://github.com/sxnnyside-project/sxnnyside-eloquent-icons/issues).

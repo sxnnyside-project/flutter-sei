@@ -1,31 +1,99 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_sei/flutter_sei.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('SeiIcon enum has correct fileName mapping', () {
-    expect(SeiIcon.home.fileName, 'home');
-    expect(SeiIcon.chartBar.fileName, 'chart-bar');
-    expect(SeiIcon.creditCard.fileName, 'credit-card');
-    expect(SeiIcon.layoutGrid.fileName, 'layout-grid');
-    expect(SeiIcon.visibilityOff.fileName, 'visibility-off');
+  group('SeiIcons', () {
+    test('exposes the correct fileName for hyphenated names', () {
+      expect(SeiIcons.home.fileName, 'home');
+      expect(SeiIcons.chartBar.fileName, 'chart-bar');
+      expect(SeiIcons.creditCard.fileName, 'credit-card');
+      expect(SeiIcons.layoutGrid.fileName, 'layout-grid');
+      expect(SeiIcons.visibilityOff.fileName, 'visibility-off');
+    });
+
+    test('contains a substantial, de-duplicated icon set', () {
+      expect(SeiIcons.values.length, greaterThan(100));
+      final fileNames = SeiIcons.values.map((e) => e.fileName).toSet();
+      expect(fileNames.length, SeiIcons.values.length);
+    });
   });
 
-  test('resolveAssetPath generates correct paths', () {
-    final outlinePath = resolveAssetPath(SeiIcon.home, SeiStyle.outline);
-    expect(outlinePath, 'packages/flutter_sei/assets/outline/home.svg');
-
-    final filledPath = resolveAssetPath(SeiIcon.star, SeiStyle.filled);
-    expect(filledPath, 'packages/flutter_sei/assets/filled/star.svg');
+  group('SeiIconsFilled', () {
+    test('every value has a matching SeiIcons entry', () {
+      final outlineNames = SeiIcons.values.map((e) => e.fileName).toSet();
+      for (final filled in SeiIconsFilled.values) {
+        expect(
+          outlineNames.contains(filled.fileName),
+          isTrue,
+          reason: '${filled.fileName} has a filled asset but no outline entry',
+        );
+      }
+    });
   });
 
-  test('SeiIcon enum contains all expected icons', () {
-    // Verify some key icons exist
-    expect(SeiIcon.values.contains(SeiIcon.home), true);
-    expect(SeiIcon.values.contains(SeiIcon.search), true);
-    expect(SeiIcon.values.contains(SeiIcon.settings), true);
-    expect(SeiIcon.values.contains(SeiIcon.user), true);
+  group('resolveAssetPath', () {
+    test('builds the outline asset path', () {
+      expect(
+        resolveAssetPath(SeiIcons.home, SeiStyle.outline),
+        'packages/flutter_sei/assets/outline/home.svg',
+      );
+    });
+  });
 
-    // Verify enum has substantial number of icons
-    expect(SeiIcon.values.length, greaterThan(100));
+  group('resolveFilledAssetPath', () {
+    test('builds the filled asset path', () {
+      expect(
+        resolveFilledAssetPath(SeiIconsFilled.star),
+        'packages/flutter_sei/assets/filled/star.svg',
+      );
+    });
+  });
+
+  group('SeiIcon widget', () {
+    testWidgets('builds an outline icon at the default size', (tester) async {
+      await tester.pumpWidget(
+        const Directionality(
+          textDirection: TextDirection.ltr,
+          child: SeiIcon(icon: SeiIcons.home),
+        ),
+      );
+
+      final svg = tester.widget<SvgPicture>(find.byType(SvgPicture));
+      expect(svg.width, 24.0);
+      expect(svg.height, 24.0);
+      expect(find.byType(SvgPicture), findsOneWidget);
+    });
+
+    testWidgets('honors size and color overrides', (tester) async {
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: SeiIcon(icon: SeiIcons.search, size: 40, color: Colors.blue),
+        ),
+      );
+
+      final svg = tester.widget<SvgPicture>(find.byType(SvgPicture));
+      expect(svg.width, 40);
+      expect(svg.height, 40);
+      expect(svg.colorFilter, isNotNull);
+    });
+
+    testWidgets('SeiIcon.filled only accepts icons with filled artwork', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const Directionality(
+          textDirection: TextDirection.ltr,
+          child: SeiIcon.filled(icon: SeiIconsFilled.star),
+        ),
+      );
+
+      expect(find.byType(SvgPicture), findsOneWidget);
+      // Pumping to settle proves the referenced asset actually loads —
+      // SeiIconsFilled makes it impossible to reference one that doesn't.
+      await tester.pumpAndSettle();
+    });
   });
 }
